@@ -1,0 +1,13 @@
+import React from 'react';
+import AddForm from '../AddForm/AddForm';
+
+const Home = () => {
+    return (
+        <div>
+            <h2>Add Theme Description</h2>
+            <AddForm></AddForm>
+        </div>
+    );
+};
+
+export default Home;
