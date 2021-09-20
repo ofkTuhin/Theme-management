@@ -13,7 +13,7 @@ const UpdateData = () => {
 const {id}=useParams()
 console.log(id)
 useEffect(()=>{
-    fetch(`http://localhost:3000/singleValue/${id}`)
+    fetch(`https://guarded-woodland-52046.herokuapp.com/singleValue/${id}`)
 .then(res=>res.json())
 .then(data=>setUpdateValue(data.themeData))
 },[id])
@@ -23,7 +23,7 @@ const onSubmit = data => {
    
    console.log(updateVAlue)
    
-    axios.put(`https://localhost:3000/update/${id}`,{
+    axios.put(`https://guarded-woodland-52046.herokuapp.com/update/${id}`,{
        
        updateVAlue
      })
