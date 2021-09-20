@@ -37,7 +37,7 @@ const AddForm = () => {
         }
 
        console.log()
-        fetch('http://localhost:3000/addTheme',{
+        fetch('https://guarded-woodland-52046.herokuapp.com/addTheme',{
             method:"POST",
             headers:{'content-type':'application/json'},
         body:JSON.stringify(event)
