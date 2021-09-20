@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+
 import './style.css'
 
 
@@ -12,9 +13,12 @@ const AddForm = () => {
     const website=[]
 
     const handleFeatureChange=(e)=>{
-        const featureInput=e.target.value
+       let featureInput=e.target.value
        feature.push(featureInput)
        console.log(feature)
+       if(e.key==='Enter'){
+           featureInput=''
+       }
         
 
        
@@ -43,6 +47,7 @@ const AddForm = () => {
         body:JSON.stringify(event)
 
         })
+        
         console.log(data)
 
        
@@ -65,7 +70,7 @@ const AddForm = () => {
       {/* errors will return when field validation fails  */}
       {errors.exampleRequired && <span>This field is required</span>}
       <div className="input-group">
-     <input className="form-control" {...register("feature")} onBlur={handleFeatureChange} name="feature" placeholder="Feature"/><br/>
+     <input className="form-control" {...register("feature")} onKeyPress={handleFeatureChange} name="feature" placeholder="Feature"/><br/>
      </div>
       {/* errors will return when field validation fails  */}
       {errors.exampleRequired && <span>This field is required</span>}
@@ -81,10 +86,10 @@ const AddForm = () => {
       {/* errors will return when field validation fails  */}
       {errors.exampleRequired && <span>This field is required</span>}
       
-      <div class="d-grid gap-2">
-  <button class="btn btn-primary" type="submit">Submit</button>
+      
+ <div class="d-grid gap-2"> <button class="btn btn-primary" type="submit">Submit</button></div>
   
-</div>
+
     </form>
         </div>
     );

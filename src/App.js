@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Home from './Component/Home/Home/Home';
 import GetData from './Component/Home/GetData/GetData';
+import ThemeFeature from './Component/Theme/ThemeFeture/ThemeFeature';
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
                 <Switch>
                 <Route path='/getData'>
                     <GetData/>
+                </Route>
+                <Route path="/themeFeature">
+                  <ThemeFeature/>
                 </Route>
 
                 <Route path='/'>

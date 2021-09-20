@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from 'react';
+import ThemeFeature from '../../Theme/ThemeFeture/ThemeFeature';
 
 const GetData = () => {
     const [data,setData]=useState([])
@@ -6,11 +7,12 @@ const GetData = () => {
         fetch('https://guarded-woodland-52046.herokuapp.com/data')
         .then(res=>res.json())
         .then(data=>setData(data))
+        console.log(data)
     },[])
     return (
-        <div>
-            <img src={data.image} alt="img"/>
-        </div>
+        <>
+          <ThemeFeature data={data}></ThemeFeature>
+        </>
     );
 };
 
