@@ -1,13 +1,21 @@
+import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './themFetaure.css'
 
-const ThemeFeature = (props) => {
+const ThemeFeature = ({data}) => {
+    console.log(data)
     const [feature,setFeature]=useState([])
-
     useEffect(()=>{
-        setFeature(props.data)
-        console.log(feature._id)
-    },[])
+        
+        setFeature(data)
+       
+    })
+    console.log(feature)
+    
+
+
+    
 
     const deleteItem=(id)=>{
        fetch(`https://guarded-woodland-52046.herokuapp.com/delete/${id}`,{
@@ -20,15 +28,11 @@ const ThemeFeature = (props) => {
                const updateData=feature.filter(data=>data._id===feature._id)
                setFeature(updateData)
 
-            
-
            }
-       }
-        
-        )
-       
+       } 
+       )}
 
-    }
+      
     
     return (
         <div>
@@ -40,17 +44,18 @@ const ThemeFeature = (props) => {
                 <th>action</th>
                 {
                     feature.map(data=><tr>
-                        <td>{data.name}</td>
-                        <td>{data.version}</td>
+                        <td>{data.themeData.name}</td>
+                        <td>{data.themeData.version}</td>
                         <td><ul>
-                        {data.feature.map(data=><li>{data}</li>)}
+                        <li>{data.themeData.feature}</li>
                             </ul></td>
                             <td><ul>
-                        {data.website.map(data=><li>{data}</li>)}
+                        <li>{data.themeData.website}</li>
                             </ul></td>
 
 
-                        <td><span>edit</span>/<span onClick={()=>deleteItem(data._id)}>delete</span></td>
+                        <td><Link to ={`/updatePage/${data._id}`}><span >edit</span></Link>/<span onClick={()=>deleteItem(data._id)}>delete
+                        </span></td>
                     </tr>)
                 }
             </table>

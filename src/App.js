@@ -9,6 +9,7 @@ import {
 import Home from './Component/Home/Home/Home';
 import GetData from './Component/Home/GetData/GetData';
 import ThemeFeature from './Component/Theme/ThemeFeture/ThemeFeature';
+import UpdateData from './Component/UpdateData/UpdateData';
 
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
                 </Route>
                 <Route path="/themeFeature">
                   <ThemeFeature/>
+                </Route>
+                <Route path='/updatePage/:id'>
+                  <UpdateData/>
                 </Route>
 
                 <Route path='/'>

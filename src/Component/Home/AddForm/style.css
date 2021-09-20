@@ -2,6 +2,6 @@
     margin: 30px auto;
     width: 30%;
 }
-.add-form form input{
+.add-form form input,textarea{
     margin: 10px 0px;
 }
