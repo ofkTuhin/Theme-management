@@ -1,17 +1,11 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './themFetaure.css'
 
-const ThemeFeature = ({data}) => {
-    console.log(data)
-    const [feature,setFeature]=useState([])
-    useEffect(()=>{
-        
-        setFeature(data)
-       
-    })
-    console.log(feature)
+const ThemeFeature = ({dataInput}) => {
+    console.log(dataInput)
+   
     
 
 
@@ -25,8 +19,8 @@ const ThemeFeature = ({data}) => {
        .then(res=>res.json())
        .then(data=>{
            if(data){
-               const updateData=feature.filter(data=>data._id===feature._id)
-               setFeature(updateData)
+               const updateData=dataInput.filter(dt=>dt._id===data._id)
+               dataInput={...data,updateData}
 
            }
        } 
@@ -43,7 +37,7 @@ const ThemeFeature = ({data}) => {
                 <th>website</th>
                 <th>action</th>
                 {
-                    feature.map(data=><tr>
+                    dataInput.map(data=><tr>
                         <td>{data.themeData.name}</td>
                         <td>{data.themeData.version}</td>
                         <td><ul>
