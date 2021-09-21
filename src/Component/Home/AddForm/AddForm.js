@@ -1,36 +1,50 @@
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
+import { useHistory } from 'react-router';
 
 import './style.css'
 
 
 
 const AddForm = () => {
-    const [themeData,setThemeData]=useState({})
+    const history=useHistory()
+    
+   
     const { register, handleSubmit, formState: { errors } } = useForm();
     
 
   
-    const onSubmit = data => {
+    const onSubmit = (data,e) => {
         console.log(data)
-        setThemeData(data)
-        
+      
+        const event ={
+            name:data.name,
+            version:data.version,
+            feature:data.feature,
+            website:data.website,
+            image:data.image
+        }
         axios.post('https://guarded-woodland-52046.herokuapp.com/addTheme',{
-           themeData
+           event
         })
-       .then(res=>console.log(res))
+       .then(res=>{
+           console.log(res)
+           history.push('/getData')
+       })
 
        console.log()
         
         
         console.log(data)
+        
 
-       
+       e.target.reset()
    
 
 
     };
+   
     return (
         <div className="add-form">
             {
@@ -69,10 +83,11 @@ const AddForm = () => {
       {errors.exampleRequired && <span>This field is required</span>}
       
       
- <div class="d-grid gap-2"> <button class="btn btn-primary" type="submit">Submit</button></div>
+ <div class="d-grid gap-2"> <input class="btn btn-primary" type="submit" value="Submit"></input></div>
   
 
     </form>
+    
         </div>
     );
 };

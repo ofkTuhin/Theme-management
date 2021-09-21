@@ -1,33 +1,13 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import AddForm from '../../Home/AddForm/AddForm';
 import './themFetaure.css'
 
-const ThemeFeature = ({dataInput}) => {
+const ThemeFeature = ({dataInput,deleteItem}) => {
     console.log(dataInput)
-   
-    
 
 
-    
-
-    const deleteItem=(id)=>{
-       fetch(`https://guarded-woodland-52046.herokuapp.com/delete/${id}`,{
-           method:'DELETE'
-       }
-       )
-       .then(res=>res.json())
-       .then(data=>{
-           if(data){
-               const updateData=dataInput.filter(dt=>dt._id===data._id)
-               dataInput={...data,updateData}
-
-           }
-       } 
-       )}
-
-      
-    
     return (
         <div>
             <table>
@@ -38,13 +18,13 @@ const ThemeFeature = ({dataInput}) => {
                 <th>action</th>
                 {
                     dataInput.map(data=><tr>
-                        <td>{data.themeData.name}</td>
-                        <td>{data.themeData.version}</td>
+                        <td>{data.event.name}</td>
+                        <td>{data.event.version}</td>
                         <td><ul>
-                        <li>{data.themeData.feature}</li>
+                        <li>{data.event.feature}</li>
                             </ul></td>
                             <td><ul>
-                        <li>{data.themeData.website}</li>
+                        <li>{data.event.website}</li>
                             </ul></td>
 
 
@@ -53,6 +33,7 @@ const ThemeFeature = ({dataInput}) => {
                     </tr>)
                 }
             </table>
+           
         </div>
     );
 };
