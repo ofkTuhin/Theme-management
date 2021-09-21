@@ -59,7 +59,7 @@ const onSubmit = (data,e) => {
            <form onSubmit={handleSubmit(onSubmit)}>
       {/* register your input into the hook by invoking the "register" function */}
      <div className="input-group">
-     <input className="form-control"  {...register("name")} placeholder="Theme Name" id="name" value={updateVAlue.data.name}/><br/>
+     <input className="form-control"  {...register("name")} placeholder="Theme Name" id="name" /><br/>
      </div>
       
       {/* include validation with required or other standard HTML validation rules */}
