@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { useHistory } from 'react-router';
@@ -18,15 +18,9 @@ const AddForm = () => {
     const onSubmit = (data,e) => {
         console.log(data)
       
-        const event ={
-            name:data.name,
-            version:data.version,
-            feature:data.feature,
-            website:data.website,
-            image:data.image
-        }
+        
         axios.post('https://guarded-woodland-52046.herokuapp.com/addTheme',{
-           event
+           data
         })
        .then(res=>{
            console.log(res)
