@@ -26,17 +26,9 @@ const AddForm = () => {
            console.log(res)
            history.push('/getData')
        })
-
-       console.log()
-        
-        
+       .then(data=>console.log(data))
         console.log(data)
-        
-
-       e.target.reset()
-   
-
-
+        e.target.reset()
     };
    
     return (

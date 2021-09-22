@@ -1,6 +1,12 @@
 table{
-    width: 95%;
+    width: 70%;
     margin: 30px auto;
+    border: 1px solid black;
+    text-align: center;
+}
+table li{
+    list-style: none;
+    text-align: center
 }
 span{
     cursor: pointer;

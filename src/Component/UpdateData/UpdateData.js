@@ -1,29 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { useForm } from "react-hook-form";
+import { set, useForm } from "react-hook-form";
 
 
 
 const UpdateData = () => {
+    const [reload,setReload]=useState('')
+    const[name,setName]=useState('')
+    const[version,setVersion]=useState('')
+    const[feature,setFeature]=useState('')
+    const[website,setWebsite]=useState('')
+    const[image,setImage]=useState('')
    const history= useHistory()
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors } } = useForm({});
 
-    const [updateVAlue,setUpdateValue]=useState([])
+    
    
 const {id}=useParams()
 console.log(id)
 useEffect(()=>{
     fetch(`https://guarded-woodland-52046.herokuapp.com/singleValue/${id}`)
 .then(res=>res.json())
-.then(data=>setUpdateValue(data))
-},[id])
-console.log(updateVAlue)
+.then(data=>{
+    setName(data.data.name)
+    setFeature(data.data.feature)
+    setImage(data.data.image)
+    setWebsite(data.data.website)
+    setVersion(data.data.version)
+
+})
+
+
+
+},[id,reload])
+
+console.log(feature)
+console.log(name)
+console.log(version)
+console.log(website)
+console.log(image)
 
     
 const onSubmit = (data,e) => {
    
-   
+   e.preventDefault()
     
     const updateData={
         name:data.name,
@@ -35,23 +56,19 @@ const onSubmit = (data,e) => {
         console.log(updateData)
     console.log(id)
     fetch(`https://guarded-woodland-52046.herokuapp.com/updateOne/${id}`,{
-        method:'PUT',
+        method:'PATCH',
         headers:{'content-type':'application/json'},
         body: JSON.stringify(updateData)
     })
-//     const url=`http://localhost:3000/update/${id}`
-   
-//   axios.put(url,
-//       {updateData}
-//   )
-  history.push('/getData')
+    .then(res=>{console.log(res)
+    
+      history.push('/getData')
+    })
+    .then(data=>setReload(data))
     e.target.reset()
 
-    
-  
-  
-
 };
+
    
     return (
         <div className="add-form">
@@ -59,12 +76,13 @@ const onSubmit = (data,e) => {
            <form onSubmit={handleSubmit(onSubmit)}>
       {/* register your input into the hook by invoking the "register" function */}
      <div className="input-group">
-     <input className="form-control"  {...register("name")} placeholder="Theme Name" id="name" /><br/>
+     <input className="form-control"  {...register("name")} placeholder="Theme Name" id="name" type="text" value={name}
+      onChange={e=>setName(e.target.value)} /><br/>
      </div>
       
       {/* include validation with required or other standard HTML validation rules */}
       <div className="input-group">
-     <input className="form-control" {...register("version")} placeholder="Theme Version" id="version" /><br/>
+     <input className="form-control" {...register("version")} placeholder="Theme Version" id="version" value={version} onChange={e=>setVersion(e.target.value)}/><br/>
      </div>
       {/* errors will return when field validation fails  */}
       {errors.exampleRequired && <span>This field is required</span>}
@@ -72,18 +90,18 @@ const onSubmit = (data,e) => {
       <div className="input-group">
 
      <textarea className="form-control" {...register("feature")} 
-      name="feature" placeholder="Feature" id="feature" /><br/>
+      name="feature" placeholder="Feature" id="feature" value={feature}onChange={e=>setFeature(e.target.value)}/><br/>
      </div>
       {/* errors will return when field validation fails  */}
       {errors.exampleRequired && <span>This field is required</span>}
 
       <div className="input-group">
-     <textarea className="form-control" {...register("website")} placeholder="Inspiration Site" id="website" /><br/>
+     <textarea className="form-control" {...register("website")} placeholder="Inspiration Site" id="website" value={website}onChange={e=>setWebsite(e.target.value)}/><br/>
      </div>
       {/* errors will return when field validation fails  */}
       {errors.exampleRequired && <span>This field is required</span>}
       <div className="input-group">
-     <input className="form-control" {...register("image")} placeholder="Theme Image" id="image" /><br/>
+     <input className="form-control" {...register("image")} placeholder="Theme Image" id="image" value={image} onChange={e=>setImage(e.target.value)}/><br/>
      </div>
       {/* errors will return when field validation fails  */}
       {errors.exampleRequired && <span>This field is required</span>}

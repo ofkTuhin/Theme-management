@@ -13,6 +13,7 @@ const GetData = () => {
         // .then(data=>setData(data))
         // console.log(data)
     },[reload])
+
     const deleteItem=(id)=>{
         fetch(`https://guarded-woodland-52046.herokuapp.com/delete/${id}`,{
             method:'DELETE'
@@ -33,6 +34,7 @@ const GetData = () => {
     return (
         <>
           <ThemeFeature dataInput={dataInput} deleteItem={deleteItem}></ThemeFeature>
+         
         </>
     );
 };

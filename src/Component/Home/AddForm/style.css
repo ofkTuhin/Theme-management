@@ -5,3 +5,6 @@
 .add-form form input,textarea{
     margin: 10px 0px;
 }
+h2{
+    text-align: center;
+}
