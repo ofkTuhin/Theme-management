@@ -4,7 +4,7 @@ import AddForm from '../AddForm/AddForm';
 const Home = () => {
     return (
         <div>
-            <h2>Add Theme Description</h2>
+            <h2 className="heading">Add Theme Description</h2>
             <AddForm></AddForm>
         </div>
     );

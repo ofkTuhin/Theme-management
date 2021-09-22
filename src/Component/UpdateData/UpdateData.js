@@ -35,13 +35,8 @@ useEffect(()=>{
 
 },[id,reload])
 
-console.log(feature)
-console.log(name)
-console.log(version)
-console.log(website)
-console.log(image)
+//update data
 
-    
 const onSubmit = (data,e) => {
    
    e.preventDefault()
@@ -72,6 +67,7 @@ const onSubmit = (data,e) => {
    
     return (
         <div className="add-form">
+            <h2 className="heading">Update Data</h2>
            
            <form onSubmit={handleSubmit(onSubmit)}>
       {/* register your input into the hook by invoking the "register" function */}

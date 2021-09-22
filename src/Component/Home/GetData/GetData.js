@@ -8,11 +8,10 @@ const GetData = () => {
     useEffect(()=>{
         axios.get('https://guarded-woodland-52046.herokuapp.com/data')
         .then(data=>setDataInput(data.data))
-        // fetch('https://guarded-woodland-52046.herokuapp.com/data')
-        // .then(res=>res.json())
-        // .then(data=>setData(data))
-        // console.log(data)
+        
     },[reload])
+
+    //delete item
 
     const deleteItem=(id)=>{
         fetch(`https://guarded-woodland-52046.herokuapp.com/delete/${id}`,{
@@ -21,16 +20,16 @@ const GetData = () => {
         )
         .then(res=>res.json())
         .then(data=>{
-            
             if(data){
-                const updateData=dataInput.filter(dt=>dt._id===data._id)
-                setDataInput(updateData)
-                setReload(data)
+            const updateData=dataInput.filter(dt=>dt._id===data._id)
+            setDataInput(updateData)
+             setReload(data)
  
             }
             
         } 
         )}
+
     return (
         <>
           <ThemeFeature dataInput={dataInput} deleteItem={deleteItem}></ThemeFeature>
