@@ -18,6 +18,7 @@ const ThemeFeature = ({dataInput,deleteItem}) => {
                 <th>version</th>
                 <th>feature</th>
                 <th>website</th>
+                <th>Image</th>
                 <th>action</th>
                 {
                     dataInput.map(data=><tr>
