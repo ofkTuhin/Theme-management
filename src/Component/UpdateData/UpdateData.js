@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import {useForm } from "react-hook-form";
+import axios from 'axios';
 
 
 
 const UpdateData = () => {
+    
+  const [imageUrl,setImageUrl]=useState()
     const [reload,setReload]=useState('')
     const[name,setName]=useState('')
     const[version,setVersion]=useState('')
@@ -39,14 +42,14 @@ useEffect(()=>{
 
 const onSubmit = (data,e) => {
    
-   e.preventDefault()
+ 
     
     const updateData={
         name:data.name,
         version:data.version,
         feature:data.feature,
         website:data.website,
-        image:data.image
+        image:imageUrl
         }
         console.log(updateData)
     console.log(id)
@@ -63,6 +66,16 @@ const onSubmit = (data,e) => {
     e.target.reset()
 
 };
+const handleImageChange=e=>{
+
+    const imageData=new FormData()
+    imageData.set('key','ac14fb7fe7d3b9b39f81a751405dbb8e')
+    imageData.append('image',e.target.files[0])
+    axios.post('https://api.imgbb.com/1/upload',imageData)
+    .then(res=>{
+        setImageUrl(res.data.data.display_url)
+    })
+}
 
    
     return (
@@ -97,13 +110,14 @@ const onSubmit = (data,e) => {
       {/* errors will return when field validation fails  */}
       {errors.exampleRequired && <span>This field is required</span>}
       <div className="input-group">
-     <input className="form-control" {...register("image")} placeholder="Theme Image" id="image" value={image} onChange={e=>setImage(e.target.value)}/><br/>
+     <input className="form-control" {...register("image")} placeholder="Theme Image" id="image"  type="file" onChange={
+         (e)=>handleImageChange(e)}/><br/>
      </div>
       {/* errors will return when field validation fails  */}
       {errors.exampleRequired && <span>This field is required</span>}
       
       
- <div class="d-grid gap-2"> <button class="btn btn-primary" type="submit">Update</button></div>
+ <div class="d-grid gap-2"> <button class="btn btn-primary"  type="submit">Update</button></div>
   
 
     </form>

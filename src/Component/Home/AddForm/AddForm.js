@@ -7,6 +7,7 @@ import './style.css'
 
 
 
+
 const AddForm = () => {
     const history=useHistory()
     const [imageUrl,setImageUrl]=useState()
@@ -48,6 +49,7 @@ const AddForm = () => {
         imageData.append('image',e.target.files[0])
         axios.post('https://api.imgbb.com/1/upload',imageData)
         .then(res=>{
+            console.log(res.data.data)
             setImageUrl(res.data.data.display_url)
         })
     }
@@ -93,6 +95,7 @@ const AddForm = () => {
   
 
     </form>
+    
     
         </div>
     );

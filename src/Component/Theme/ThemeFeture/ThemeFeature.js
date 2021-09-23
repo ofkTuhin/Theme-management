@@ -1,15 +1,18 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import {AiFillDelete} from 'react-icons/ai'
+import {BiEdit} from 'react-icons/bi'
 
 import './themFetaure.css'
 
 const ThemeFeature = ({dataInput,deleteItem}) => {
-    console.log(dataInput)
+   
 
 
     return (
         <div>
+            <h2 className='heading'>Data List</h2>
             <table>
                 <th>name</th>
                 <th>version</th>
@@ -29,7 +32,7 @@ const ThemeFeature = ({dataInput,deleteItem}) => {
                             <td><img src={data.event.image} alt="img"/></td>
 
 
-                        <td><Link to ={`/updatePage/${data._id}`}><span >edit</span></Link>/<span onClick={()=>deleteItem(data._id)}>delete
+                        <td><Link to ={`/updatePage/${data._id}`}><span className="edit"><BiEdit/></span></Link><span onClick={()=>deleteItem(data._id)} className="delete"><AiFillDelete/>
                         </span></td>
                     </tr>)
                 }
