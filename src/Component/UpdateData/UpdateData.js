@@ -13,7 +13,7 @@ const UpdateData = () => {
     const[version,setVersion]=useState('')
     const[feature,setFeature]=useState('')
     const[website,setWebsite]=useState('')
-    const[image,setImage]=useState('')
+  
    const history= useHistory()
 
     const { register, handleSubmit, formState: { errors } } = useForm({});
@@ -28,7 +28,7 @@ useEffect(()=>{
 .then(data=>{
     setName(data.event.name)
     setFeature(data.event.feature)
-    setImage(data.event.image)
+   
     setWebsite(data.event.website)
     setVersion(data.event.version)
 
