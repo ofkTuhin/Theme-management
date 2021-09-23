@@ -9,6 +9,7 @@ const GetData = () => {
         axios.get('https://guarded-woodland-52046.herokuapp.com/data')
         .then(data=>setDataInput(data.data))
         
+        
     },[reload])
 
     //delete item

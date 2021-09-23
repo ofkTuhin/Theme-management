@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { useHistory } from 'react-router';
@@ -9,18 +9,28 @@ import './style.css'
 
 const AddForm = () => {
     const history=useHistory()
+    const [imageUrl,setImageUrl]=useState()
     
    
     const { register, handleSubmit, formState: { errors } } = useForm();
     
+ 
+       
 
-  
+
     const onSubmit = (data,e) => {
         console.log(data)
       
-        
+        const event = {
+            name:data.name,
+            version:data.version,
+            feature:data.feature,
+            website:data.website,
+            image:imageUrl
+        }
         axios.post('https://guarded-woodland-52046.herokuapp.com/addTheme',{
-           data
+          event
+           
         })
        .then(res=>{
            console.log(res)
@@ -30,12 +40,22 @@ const AddForm = () => {
         console.log(data)
         e.target.reset()
     };
+
+    const handleImageChange=e=>{
+
+        const imageData=new FormData()
+        imageData.set('key','ac14fb7fe7d3b9b39f81a751405dbb8e')
+        imageData.append('image',e.target.files[0])
+        axios.post('https://api.imgbb.com/1/upload',imageData)
+        .then(res=>{
+            setImageUrl(res.data.data.display_url)
+        })
+    }
+   
    
     return (
         <div className="add-form">
-            {
-         
-      }
+       
      <form onSubmit={handleSubmit(onSubmit)}>
       {/* register your input into the hook by invoking the "register" function */}
      <div className="input-group">
@@ -63,7 +83,7 @@ const AddForm = () => {
       {/* errors will return when field validation fails  */}
       {errors.exampleRequired && <span>This field is required</span>}
       <div className="input-group">
-     <input className="form-control" {...register("image")} placeholder="Theme Image"/><br/>
+     <input className="form-control" {...register("image")} placeholder="Theme Image" onChange={handleImageChange} type="file"/><br/>
      </div>
       {/* errors will return when field validation fails  */}
       {errors.exampleRequired && <span>This field is required</span>}

@@ -18,14 +18,15 @@ const ThemeFeature = ({dataInput,deleteItem}) => {
                 <th>action</th>
                 {
                     dataInput.map(data=><tr>
-                        <td>{data.data.name}</td>
-                        <td>{data.data.version}</td>
+                        <td>{data.event.name}</td>
+                        <td>{data.event.version}</td>
                         <td><ul>
-                        <li>{data.data.feature}</li>
+                        <li>{data.event.feature}</li>
                             </ul></td>
                             <td><ul>
-                        <li>{data.data.website}</li>
+                        <li>{data.event.website}</li>
                             </ul></td>
+                            <td><img src={data.event.image} alt="img"/></td>
 
 
                         <td><Link to ={`/updatePage/${data._id}`}><span >edit</span></Link>/<span onClick={()=>deleteItem(data._id)}>delete

@@ -23,11 +23,11 @@ useEffect(()=>{
     fetch(`https://guarded-woodland-52046.herokuapp.com/singleValue/${id}`)
 .then(res=>res.json())
 .then(data=>{
-    setName(data.data.name)
-    setFeature(data.data.feature)
-    setImage(data.data.image)
-    setWebsite(data.data.website)
-    setVersion(data.data.version)
+    setName(data.event.name)
+    setFeature(data.event.feature)
+    setImage(data.event.image)
+    setWebsite(data.event.website)
+    setVersion(data.event.version)
 
 })
 
