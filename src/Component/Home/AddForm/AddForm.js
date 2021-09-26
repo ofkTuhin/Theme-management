@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { useHistory } from 'react-router';
+import GitUrlParse from 'git-url-parse'
 
 import './style.css'
 
@@ -10,7 +11,9 @@ import './style.css'
 
 const AddForm = () => {
     const history=useHistory()
-    const [imageUrl,setImageUrl]=useState()
+ 
+
+    
     
    
     const { register, handleSubmit, formState: { errors } } = useForm();
@@ -20,39 +23,54 @@ const AddForm = () => {
 
 
     const onSubmit = (data,e) => {
-        console.log(data)
-      
-        const event = {
-            name:data.name,
-            version:data.version,
-            feature:data.feature,
-            website:data.website,
-            image:imageUrl
-        }
-        axios.post('https://guarded-woodland-52046.herokuapp.com/addTheme',{
-          event
-           
-        })
-       .then(res=>{
-           console.log(res)
-           history.push('/getData')
-       })
-       .then(data=>console.log(data))
-        console.log(data)
+
+        console.log(data.url)
+       const pathname = GitUrlParse(data.url).pathname
+       console.log(pathname)
+       const res = async () => {
+        const result = await axios.get(`https://api.github.com/repos${[pathname]}`);
+        console.log(result)
+        console.log(result.data.fork)
+
+         const event = {
+             themeName:result.data.name,
+             fork:result.data.forks,
+             star:result.data.stargazers_count,
+             LastCommit:result.data.updated_at,
+             create:result.data.created_at
+ 
+         }
+         console.log(event)
+         axios.post('https://guarded-woodland-52046.herokuapp.com/addTheme',{
+           event
+            
+         })
+        // .then(res=>{
+        //     console.log(res)
+        //     
+        // })
+        .then(da=>console.log(da))
+       
+
+      };
+      res(history.push('/getData'))
+       
+     
+        
         e.target.reset()
     };
 
-    const handleImageChange=e=>{
+    // const handleImageChange=e=>{
 
-        const imageData=new FormData()
-        imageData.set('key','ac14fb7fe7d3b9b39f81a751405dbb8e')
-        imageData.append('image',e.target.files[0])
-        axios.post('https://api.imgbb.com/1/upload',imageData)
-        .then(res=>{
-            console.log(res.data.data)
-            setImageUrl(res.data.data.display_url)
-        })
-    }
+    //     const imageData=new FormData()
+    //     imageData.set('key','ac14fb7fe7d3b9b39f81a751405dbb8e')
+    //     imageData.append('image',e.target.files[0])
+    //     axios.post('https://api.imgbb.com/1/upload',imageData)
+    //     .then(res=>{
+    //         console.log(res.data.data)
+    //         setImageUrl(res.data.data.display_url)
+    //     })
+    // }
    
    
     return (
@@ -61,32 +79,32 @@ const AddForm = () => {
      <form onSubmit={handleSubmit(onSubmit)}>
       {/* register your input into the hook by invoking the "register" function */}
      <div className="input-group">
-     <input className="form-control"  {...register("name")} placeholder="Theme Name" /><br/>
+     <input className="form-control"  {...register("url")} placeholder="url" /><br/>
      </div>
       
       {/* include validation with required or other standard HTML validation rules */}
-      <div className="input-group">
+      {/* <div className="input-group">
      <input className="form-control" {...register("version")} placeholder="Theme Version"/><br/>
-     </div>
+     </div> */}
       {/* errors will return when field validation fails  */}
-      {errors.exampleRequired && <span>This field is required</span>}
+      {/* {errors.exampleRequired && <span>This field is required</span>}
       
       <div className="input-group">
 
      <textarea className="form-control" {...register("feature")} 
       name="feature" placeholder="Feature"/><br/>
-     </div>
+     </div> */}
       {/* errors will return when field validation fails  */}
-      {errors.exampleRequired && <span>This field is required</span>}
+      {/* {errors.exampleRequired && <span>This field is required</span>}
 
       <div className="input-group">
      <textarea className="form-control" {...register("website")} placeholder="Inspiration Site"/><br/>
-     </div>
+     </div> */}
       {/* errors will return when field validation fails  */}
-      {errors.exampleRequired && <span>This field is required</span>}
+      {/* {errors.exampleRequired && <span>This field is required</span>}
       <div className="input-group">
      <input className="form-control" {...register("image")} placeholder="Theme Image" onChange={handleImageChange} type="file"/><br/>
-     </div>
+     </div> */}
       {/* errors will return when field validation fails  */}
       {errors.exampleRequired && <span>This field is required</span>}
       

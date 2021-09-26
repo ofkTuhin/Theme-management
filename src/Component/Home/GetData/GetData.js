@@ -7,7 +7,9 @@ const GetData = () => {
     const [dataInput,setDataInput]=useState([])
     useEffect(()=>{
         axios.get('https://guarded-woodland-52046.herokuapp.com/data')
-        .then(data=>setDataInput(data.data))
+        .then(data=>{setDataInput(data.data)
+        console.log(dataInput)
+        })
         
         
     },[reload])

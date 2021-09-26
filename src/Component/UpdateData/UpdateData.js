@@ -13,7 +13,7 @@ const UpdateData = () => {
     const[version,setVersion]=useState('')
     const[feature,setFeature]=useState('')
     const[website,setWebsite]=useState('')
-  
+    const[image,setImage]=useState('')
    const history= useHistory()
 
     const { register, handleSubmit, formState: { errors } } = useForm({});
@@ -28,7 +28,7 @@ useEffect(()=>{
 .then(data=>{
     setName(data.event.name)
     setFeature(data.event.feature)
-   
+   setImage(data.event.image)
     setWebsite(data.event.website)
     setVersion(data.event.version)
 
@@ -86,12 +86,12 @@ const handleImageChange=e=>{
       {/* register your input into the hook by invoking the "register" function */}
      <div className="input-group">
      <input className="form-control"  {...register("name")} placeholder="Theme Name" id="name" type="text" value={name}
-      onChange={e=>setName(e.target.value)} /><br/>
+      onInput={e=>setName(e.target.value)} /><br/>
      </div>
       
       {/* include validation with required or other standard HTML validation rules */}
       <div className="input-group">
-     <input className="form-control" {...register("version")} placeholder="Theme Version" id="version" value={version} onChange={e=>setVersion(e.target.value)}/><br/>
+     <input className="form-control" {...register("version")} placeholder="Theme Version" id="version" value={version} onInput={e=>setVersion(e.target.value)}/><br/>
      </div>
       {/* errors will return when field validation fails  */}
       {errors.exampleRequired && <span>This field is required</span>}
@@ -99,18 +99,19 @@ const handleImageChange=e=>{
       <div className="input-group">
 
      <textarea className="form-control" {...register("feature")} 
-      name="feature" placeholder="Feature" id="feature" value={feature}onChange={e=>setFeature(e.target.value)}/><br/>
+      name="feature" placeholder="Feature" id="feature" value={feature}onInput={e=>setFeature(e.target.value)}/><br/>
      </div>
       {/* errors will return when field validation fails  */}
       {errors.exampleRequired && <span>This field is required</span>}
 
       <div className="input-group">
-     <textarea className="form-control" {...register("website")} placeholder="Inspiration Site" id="website" value={website}onChange={e=>setWebsite(e.target.value)}/><br/>
+     <textarea className="form-control" {...register("website")} placeholder="Inspiration Site" id="website" value={website}onInput={e=>setWebsite(e.target.value)}/><br/>
      </div>
       {/* errors will return when field validation fails  */}
       {errors.exampleRequired && <span>This field is required</span>}
       <div className="input-group">
-     <input className="form-control" {...register("image")} placeholder="Theme Image" id="image"  type="file" onChange={
+     <input className="form-control" {...register("image")} placeholder="Theme Image" id="image"  type="file" 
+    value={image} alt="fff" onInput={
          (e)=>handleImageChange(e)}/><br/>
      </div>
       {/* errors will return when field validation fails  */}
