@@ -23,12 +23,23 @@ td a{
 .edit{
     color: blue;
 }
-img{
-    height: 50px;
-    width: 50px;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
+
+.themeData{
+    height: 320px;
+    padding: 10px;
+    margin-top: 30px;
+    box-shadow:0px 0px 10px #0d6efd3d;
+    
+}
+.themeData .themeImage{
+    height: 40%;
+    width: 100%;
+}
+.themeData .themeImage img{
+    height: 100%;
+    width: 100%;
+}
+
+.themeData p{
+    margin: 0 !important;
 }

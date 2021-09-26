@@ -7,8 +7,12 @@ import { BiEdit } from 'react-icons/bi'
 import './themFetaure.css'
 
 const ThemeFeature = ({ dataInput, deleteItem }) => {
+    
+  
+   
 
-    console.log(dataInput)
+   
+    
 
     const currentDate = new Date()
     return (
@@ -26,7 +30,7 @@ const ThemeFeature = ({ dataInput, deleteItem }) => {
                 {
                     dataInput.map(data =>
                         <tr>
-                            <td>{data.event.themeName}</td>
+                            <td>{data.event.themeName}`</td>
                             <td>{data.event.fork}</td>
                             <td>
                                 <li>{data.event.star}</li>
@@ -71,6 +75,70 @@ const ThemeFeature = ({ dataInput, deleteItem }) => {
                 }
 
             </table>
+
+
+            <div className="organizeData">
+                <div className="container">
+                    <div className="row">
+                       {
+                           dataInput.map(data=>
+                            <div className="col-lg-3">
+                            <div className="themeData">
+                                <div className="themeImage">
+                                    <img src={`https://demo.gethugothemes.com/thumbnails/${data.event.themeName.replace("-hugo","")}.webp`}alt="ddd"/>
+                                   
+
+                                    
+                                </div>
+                                <div className="themeName">
+                                    <h4>{data.event.themeName}</h4>
+                                </div>
+                                <div className="startFork">
+                                    <div className="row">
+                                        <p>Fork: {data.event.fork}</p>
+                                        <p>Stars: {data.event.star}</p>
+                                    </div>
+                                </div>
+                                <div className="date">
+                                    <h6 className="commitCreate">Create Date: {
+                                          currentDate.getFullYear() > new Date(data.event.create).getFullYear() ? <small>{currentDate.getFullYear() - new Date(data.event.create).getFullYear()}  year ago</small> :
+                                          currentDate.getMonth() > new Date(data.event.create).getMonth() ? <small>{currentDate.getMonth() - new Date(data.event.create).getMonth()} month ago</small> :
+      
+                                              currentDate.getDate() > new Date(data.event.create).getDate() ? <small> {currentDate.getDate() - new Date(data.event.create).getDate()}days ago</small> :
+      
+                                                  currentDate.getHours() > new Date(data.event.create).getHours() ? <small>{currentDate.getHours() - new Date(data.event.create).getHours()} hours ago</small> :
+      
+                                                      currentDate.getMinutes() > new Date(data.event.create).getMinutes() ? <small>{currentDate.getMinutes() - new Date(data.event.create).getMinutes()} minutes ago</small> :
+                                                          <small>{currentDate.getSeconds() - new Date(data.event.create).getSeconds()} seconds ago</small>
+                                    }</h6>
+                                    <h6 className="commitCreate">LastCommit: 
+                                    {
+                                       
+                                currentDate.getFullYear() > new Date(data.event.create).getFullYear() ? <small>{currentDate.getFullYear() - new Date(data.event.create).getFullYear()}  year ago</small> :
+                                currentDate.getMonth() > new Date(data.event.create).getMonth() ? <small>{currentDate.getMonth() - new Date(data.event.create).getMonth()} month ago</small> :
+
+                                    currentDate.getDate() > new Date(data.event.create).getDate() ? <small> {currentDate.getDate() - new Date(data.event.create).getDate()}days ago</small> :
+
+                                        currentDate.getHours() > new Date(data.event.create).getHours() ? <small>{currentDate.getHours() - new Date(data.event.create).getHours()} hours ago</small> :
+
+                                            currentDate.getMinutes() > new Date(data.event.create).getMinutes() ? <small>{currentDate.getMinutes() - new Date(data.event.create).getMinutes()} minutes ago</small> :
+                                                <small>{currentDate.getSeconds() - new Date(data.event.create).getSeconds()} seconds ago</small> 
+                                    }
+                                    </h6>
+                                </div>
+
+                                <div className="button d-flex justify-content-between">
+                                    <button className="btn btn-success">Read Me</button>
+                                    <button className="btn btn-secondary">Github</button>
+                                </div>
+                            </div>
+                        </div>
+                            )
+                            
+                       }
+                    </div>
+                </div>
+            </div>
         </div>
     );
 };
