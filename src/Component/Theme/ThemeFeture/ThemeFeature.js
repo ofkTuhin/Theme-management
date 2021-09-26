@@ -1,5 +1,5 @@
 
-import React, { useState,useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import {AiFillDelete} from 'react-icons/ai'
 import {BiEdit} from 'react-icons/bi'
@@ -7,28 +7,14 @@ import {BiEdit} from 'react-icons/bi'
 import './themFetaure.css'
 
 const ThemeFeature = ({dataInput,deleteItem}) => {
-   const [data,setData]= useState([])
-    console.log(dataInput)
-   
-useEffect(() => {
-    dataInput.map(data=>{
-        return(
-            setData(data.event)
-        )
-    })
   
-}, [dataInput])
-
-const createDate=new Date(data.create)
-const commitDate= new Date(data.LastCommit)
+    console.log(dataInput)
 
 const currentDate=new Date()
-console.log(createDate,currentDate)
-
-
     return (
         <div>
             <h2 className='heading'>Data List</h2>
+           
             <table>
             <th>name</th>
                 <th>fork</th>
@@ -37,53 +23,56 @@ console.log(createDate,currentDate)
                 <th>Last Commit</th>
                 <th>create Date</th>
                 <th>action</th>
-                <tr>
-                        <td>{data.themeName}</td>
-                        <td>{data.fork}</td>
+               {
+                   dataInput.map(data=>
+                    <tr>
+                    <td>{data.event.themeName}</td>
+                    <td>{data.event.fork}</td>
+                    <td>
+                    <li>{data.event.star}</li>
+                        </td>
                         <td>
-                        <li>{data.star}</li>
-                            </td>
-                            <td>
-                            {
+                        {
 
-currentDate.getFullYear()>commitDate.getFullYear() ?<td>{currentDate.getFullYear()-commitDate.getFullYear()}  year ago</td> :
- currentDate.getMonth()>commitDate.getMonth() ?<td>{currentDate.getMonth()-commitDate.getMonth()} moth ago</td>:
+            currentDate.getFullYear()>new Date(data.event.LastCommit).getFullYear() ?<td>{currentDate.getFullYear()-new Date(data.event.LastCommit).getFullYear()}  year ago</td> :
+            currentDate.getMonth()>new Date(data.event.LastCommit).getMonth() ?<td>{currentDate.getMonth()-new Date(data.event.LastCommit).getMonth()} moth ago</td>:
 
- currentDate.getDate()>commitDate.getDate()? <td> {currentDate.getDate()-commitDate.getDate()}days ago</td>:
+            currentDate.getDate()>new Date(data.event.LastCommit).getDate()? <td> {currentDate.getDate()-new Date(data.event.LastCommit).getDate()}days ago</td>:
 
-  currentDate.getHours()>commitDate.getHours()? <td>{currentDate.getHours()-commitDate.getHours()} hours ago</td>:
+            currentDate.getHours()>new Date(data.event.LastCommit).getHours()? <td>{currentDate.getHours()-new Date(data.event.LastCommit).getHours()} hours ago</td>:
 
-  currentDate.getMinutes()>commitDate.getMinutes()? <td>{currentDate.getMinutes()-commitDate.getMinutes()} minutes ago</td>:
-  <td>{currentDate.getSeconds()-commitDate.getSeconds() } seconds ago</td>
+            currentDate.getMinutes()>new Date(data.event.LastCommit).getMinutes()? <td>{currentDate.getMinutes()-new Date(data.event.LastCommit).getMinutes()} minutes ago</td>:
+            <td>{currentDate.getSeconds()-new Date(data.event.LastCommit).getSeconds() } seconds ago</td>
 
 
 
 }
-                            </td>
-                            
-                           {
+                        </td>
+                        
+                       {
 
-                               currentDate.getFullYear()>createDate.getFullYear() ?<td>{currentDate.getFullYear()-createDate.getFullYear()}  year ago</td> :
-                                currentDate.getMonth()>createDate.getMonth() ?<td>{currentDate.getMonth()-createDate.getMonth()} moth ago</td>:
+                           currentDate.getFullYear()>new Date(data.event.create).getFullYear() ?<td>{currentDate.getFullYear()-new Date(data.event.create).getFullYear()}  year ago</td> :
+                            currentDate.getMonth()>new Date(data.event.create).getMonth() ?<td>{currentDate.getMonth()-new Date(data.event.create).getMonth()} moth ago</td>:
 
-                                currentDate.getDate()>createDate.getDate()? <td> {currentDate.getDate()-createDate.getDate()}days ago</td>:
+                            currentDate.getDate()>new Date(data.event.create).getDate()? <td> {currentDate.getDate()-new Date(data.event.create).getDate()}days ago</td>:
 
-                                 currentDate.getHours()>createDate.getHours()? <td>{currentDate.getHours()-createDate.getHours()} hours ago</td>:
+                             currentDate.getHours()>new Date(data.event.create).getHours()? <td>{currentDate.getHours()-new Date(data.event.create).getHours()} hours ago</td>:
 
-                                 currentDate.getMinutes()>createDate.getMinutes()? <td>{currentDate.getMinutes()-createDate.getMinutes()} minutes ago</td>:
-                                 <td>{currentDate.getSeconds()-createDate.getSeconds() } seconds ago</td>
+                             currentDate.getMinutes()>new Date(data.event.create).getMinutes()? <td>{currentDate.getMinutes()-new Date(data.event.create).getMinutes()} minutes ago</td>:
+                             <td>{currentDate.getSeconds()-new Date(data.event.create).getSeconds() } seconds ago</td>
 
-                           
-                           
-                           }
+                       
+                       
+                       }
 
 
-                        <td><Link to ={`/updatePage/${data?._id}`}><span className="edit"><BiEdit/></span></Link><span onClick={()=>deleteItem(data?._id)} className="delete"><AiFillDelete/>
-                        </span></td>
-                    </tr>
+                    <td><Link to ={`/updatePage/${data?._id}`}><span className="edit"><BiEdit/></span></Link><span onClick={()=>deleteItem(data?._id)} className="delete"><AiFillDelete/>
+                    </span></td>
+                </tr>
+                    )
+               }
                 
             </table>
-           
         </div>
     );
 };

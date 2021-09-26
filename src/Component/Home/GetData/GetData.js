@@ -12,7 +12,7 @@ const GetData = () => {
         })
         
         
-    },[reload])
+    },[dataInput,reload])
 
     //delete item
 
