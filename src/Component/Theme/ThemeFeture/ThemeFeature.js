@@ -1,5 +1,5 @@
 
-import React, {  useState } from 'react';
+import React, {  useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AiFillDelete } from 'react-icons/ai'
 import { BiEdit } from 'react-icons/bi'
@@ -9,31 +9,37 @@ import './themFetaure.css'
 const ThemeFeature = ({ dataInput, deleteItem }) => {
    
 
-    const [themeData, setThemData] = useState([])
-    // useEffect(()=>{
-    //     setThemData(dataInput)
-    //     console.log(themeData)
-    // },[dataInput,themeData])
-  
+    const [themeData, setThemData] = useState(dataInput)
+   
+   
+    useEffect(()=>{
+        setThemData(dataInput)
+       
+       
+    },[])
+
      const handleClick=()=>{
         
    setThemData(dataInput)
   
-   
-
     }
     
-    
  
-  const handleFork=()=>{
-      dataInput.sort((a,b)=>b.event.fork-a.event.fork)
-      setThemData(dataInput)
+  const handleFork=(e)=>{
+     const fitlerFork= themeData.sort((a,b)=>b.event.fork-a.event.fork)
+     console.log(fitlerFork)
+      setThemData(fitlerFork)
+    
       console.log(themeData)
+      e.preventDefault()
+      
     
   }
-  const handleStars=()=>{
-   dataInput.sort((a,b)=>b.event.star-a.event.star)
+  const handleStars=(e)=>{
+   themeData.sort((a,b)=>b.event.star-a.event.star)
     setThemData(dataInput)
+    e.preventDefault()
+  
     console.log(themeData)
     
 }
@@ -43,7 +49,7 @@ const currentDate = new Date()
             <h2 className='heading'>Data List</h2>
 
             <div className="filterButton d-flex justify-content-between">
-               <button className="active btn btn-default" children onClick={handleClick} >
+               <button className="active btn btn-default" children onClick={handleClick} active >
                    All
                </button>
                <button className=" btn" onClick={handleFork} >
