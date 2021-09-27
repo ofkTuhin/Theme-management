@@ -43,3 +43,14 @@ td a{
 .themeData p{
     margin: 0 !important;
 }
+.filterButton{
+    width: 25%;
+    margin: auto;
+}
+.filterButton button{
+    border: 1px solid;
+}
+.active, .filterButton button:hover{
+   background-color:rgb(73, 82, 82);
+
+}
