@@ -4,57 +4,68 @@ import { Link } from 'react-router-dom';
 import { AiFillDelete } from 'react-icons/ai'
 import { BiEdit } from 'react-icons/bi'
 
+import axios from 'axios';
+
+
 import './themFetaure.css'
+// import axios from 'axios';
 
-const ThemeFeature = ({ dataInput, deleteItem }) => {
-   
-
-    const [themeData, setThemData] = useState(dataInput)
-   
-   
-    useEffect(()=>{
-        setThemData(dataInput)
-       
-       
-    },[])
-
-     const handleClick=()=>{
+const ThemeFeature = ({deleteItem,}) => {
+    
+    const [dataInput,setDataInput]=useState([])
+    const [reload,setReload]=useState('')
+    const res=async()=>{
+            
+        const result=await axios.get('https://guarded-woodland-52046.herokuapp.com/data')
+        console.log(result.data)
+        setDataInput(result.data)
         
-   setThemData(dataInput)
-  
-    }
-    
+       }
+    useEffect(()=>{
+
+         
+         
+     res()
+     },[reload])
+
  
-  const handleFork=(e)=>{
-     const fitlerFork= themeData.sort((a,b)=>b.event.fork-a.event.fork)
-     console.log(fitlerFork)
-      setThemData(fitlerFork)
-    
-      console.log(themeData)
-      e.preventDefault()
+
+     const handleAll=(e)=>{
+       
+        console.log('all')
+           setDataInput([...dataInput])
+           setReload(dataInput)
+           console.log(dataInput)
+       }
+       const handleFork=()=>{
+      dataInput.sort((a,b)=>b.event.fork-a.event.fork)
+        
+         setDataInput( [...dataInput])
+         console.log( dataInput)
+ 
+     }
+     const handleStars=()=>{
+     dataInput.sort((a,b)=>b.event.star-a.event.star)
+       setDataInput([...dataInput])
       
-    
-  }
-  const handleStars=(e)=>{
-   themeData.sort((a,b)=>b.event.star-a.event.star)
-    setThemData(dataInput)
-    e.preventDefault()
-  
-    console.log(themeData)
-    
-}
+     
+       console.log(dataInput)
+       
+   }   
+   
 const currentDate = new Date()
     return (
         <div>
-            <h2 className='heading'>Data List</h2>
+            
 
             <div className="filterButton d-flex justify-content-between">
-               <button className="active btn btn-default" children onClick={handleClick} active >
+               <button className="active btn btn-default" 
+               onClick={handleAll}  active >
                    All
                </button>
                <button className=" btn" onClick={handleFork} >
                    Fork
-               </button>
+                </button>
                <button className=" btn" onClick={handleStars} >
                    Star
                </button>
@@ -72,7 +83,7 @@ const currentDate = new Date()
                { 
 
 
-    themeData.map(data =>
+ dataInput.map(data =>
          <tr>
              <td>{data.event.themeName}</td>
              <td>{data.event.fork}</td>
@@ -121,7 +132,7 @@ const currentDate = new Date()
                 <div className="container">
                     <div className="row">
                        {
-                           themeData.map(data=>
+                         dataInput.map(data=>
                             <div className="col-lg-3">
                             <div className="themeData">
                                 <div className="themeImage">
@@ -168,8 +179,8 @@ const currentDate = new Date()
                                 </div>
 
                                 <div className="button d-flex justify-content-between">
-                                    <button className="btn btn-success">Read Me</button>
-                                    <button className="btn btn-secondary">Github</button>
+                                    <a className="btn btn-success" href={data.event.readme} target="_blank">Read Me</a>
+                                    <a className="btn btn-secondary" href={data.event.gitUrl}  target="_blank">Github</a>
                                 </div>
                             </div>
                         </div>

@@ -17,6 +17,9 @@ span{
 td a{
     text-decoration: none;
 }
+p{
+    text-align: center;
+}
 .delete{
     color: red;
 }
@@ -45,7 +48,7 @@ td a{
 }
 .filterButton{
     width: 25%;
-    margin: auto;
+    margin: 40px auto;
 }
 .filterButton button{
     border: 1px solid;

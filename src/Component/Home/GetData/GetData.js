@@ -2,17 +2,27 @@ import axios from 'axios';
 import React,{useState,useEffect} from 'react';
 import ThemeFeature from '../../Theme/ThemeFeture/ThemeFeature';
 
+
 const GetData = () => {
     const [reload,setReload]=useState('')
     const [dataInput,setDataInput]=useState([])
+    const res=async()=>{
+           
+        const result=await axios.get('https://guarded-woodland-52046.herokuapp.com/data')
+        console.log(result.data)
+        setDataInput(result.data)
+        
+       }
+    
     useEffect(()=>{
-        axios.get('https://guarded-woodland-52046.herokuapp.com/data')
-        .then(data=>{setDataInput(data.data)
-        
-        })
-        
-        
+   
+      res()  
+     
     },[dataInput,reload])
+    //aikhane
+   
+
+
 
     //delete item
 
@@ -35,7 +45,14 @@ const GetData = () => {
 
     return (
         <>
-          <ThemeFeature dataInput={dataInput} deleteItem={deleteItem}></ThemeFeature>
+          <ThemeFeature 
+          dataInput={dataInput}
+           deleteItem={deleteItem} 
+          
+         
+           >
+
+           </ThemeFeature>
          
         </>
     );

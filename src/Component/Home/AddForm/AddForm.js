@@ -37,7 +37,9 @@ const AddForm = () => {
              fork:result.data.forks,
              star:result.data.stargazers_count,
              LastCommit:result.data.updated_at,
-             create:result.data.created_at
+             create:result.data.created_at,
+             gitUrl:result.data.html_url,
+             readme:`https://github-data-exp.netlify.app/theme/${result.data.name}`
  
          }
          console.log(event)
