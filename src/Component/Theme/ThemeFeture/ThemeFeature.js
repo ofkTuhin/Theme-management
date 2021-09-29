@@ -8,7 +8,10 @@ import axios from 'axios';
 
 
 import './themFetaure.css'
+
 // import axios from 'axios';
+
+
 
 const ThemeFeature = ({deleteItem,}) => {
     
@@ -19,7 +22,7 @@ const ThemeFeature = ({deleteItem,}) => {
         const result=await axios.get('https://guarded-woodland-52046.herokuapp.com/data')
         console.log(result.data)
         setDataInput(result.data)
-        setReload(result.data)
+        
         
        }
     useEffect(()=>{
@@ -33,18 +36,20 @@ const ThemeFeature = ({deleteItem,}) => {
 
      const handleAll=(e)=>{
        
-       if(dataInput){
+      
         console.log('all')
-        setDataInput(dataInput)
+        setDataInput([...dataInput])
+        setReload(dataInput)
         
         console.log(dataInput)
-       }
+      
        }
        const handleFork=()=>{
       dataInput.sort((a,b)=>b.event.fork-a.event.fork)
         
          setDataInput( [...dataInput])
-         setReload(dataInput)
+        
+        
          console.log( dataInput)
  
      }
@@ -52,7 +57,8 @@ const ThemeFeature = ({deleteItem,}) => {
          console.log('star')
      dataInput.sort((a,b)=>b.event.star-a.event.star)
        setDataInput([...dataInput])
-       setReload(dataInput)
+      
+      
        console.log(reload)
       
      
@@ -61,6 +67,7 @@ const ThemeFeature = ({deleteItem,}) => {
    }   
    
 const currentDate = new Date()
+
     return (
         <div>
             
@@ -79,62 +86,7 @@ const currentDate = new Date()
             
             </div>
 
-            <table>
-                <th>name</th>
-                <th>fork</th>
-
-                <th>stars</th>
-                <th>Last Commit</th>
-                <th>create Date</th>
-                <th>action</th>
-               { 
-
-
- dataInput.map(data =>
-         <tr>
-             <td>{data.event.themeName}</td>
-             <td>{data.event.fork}</td>
-             <td>
-                 <li>{data.event.star}</li>
-             </td>
-             <td>
-                 {
-
-                     currentDate.getFullYear() > new Date(data.event.LastCommit).getFullYear() ? <td>{currentDate.getFullYear() - new Date(data.event.LastCommit).getFullYear()}  year ago</td> :
-                         currentDate.getMonth() > new Date(data.event.LastCommit).getMonth() ? <td>{currentDate.getMonth() - new Date(data.event.LastCommit).getMonth()} moth ago</td> :
-
-                             currentDate.getDate() > new Date(data.event.LastCommit).getDate() ? <td> {currentDate.getDate() - new Date(data.event.LastCommit).getDate()}days ago</td> :
-
-                                 currentDate.getHours() > new Date(data.event.LastCommit).getHours() ? <td>{currentDate.getHours() - new Date(data.event.LastCommit).getHours()} hours ago</td> :
-
-                                     currentDate.getMinutes() > new Date(data.event.LastCommit).getMinutes() ? <td>{currentDate.getMinutes() - new Date(data.event.LastCommit).getMinutes()} minutes ago</td> :
-                                         <td>{currentDate.getSeconds() - new Date(data.event.LastCommit).getSeconds()} seconds ago</td>
-
-                 }
-             </td>
-             {
- currentDate.getFullYear() > new Date(data.event.create).getFullYear() ? <td>{currentDate.getFullYear() - new Date(data.event.create).getFullYear()}  year ago</td> :
-                     currentDate.getMonth() > new Date(data.event.create).getMonth() ? <td>{currentDate.getMonth() - new Date(data.event.create).getMonth()} month ago</td> :
-
-                         currentDate.getDate() > new Date(data.event.create).getDate() ? <td> {currentDate.getDate() - new Date(data.event.create).getDate()}days ago</td> :
-
-                             currentDate.getHours() > new Date(data.event.create).getHours() ? <td>{currentDate.getHours() - new Date(data.event.create).getHours()} hours ago</td> :
-
-                                 currentDate.getMinutes() > new Date(data.event.create).getMinutes() ? <td>{currentDate.getMinutes() - new Date(data.event.create).getMinutes()} minutes ago</td> :
-                                     <td>{currentDate.getSeconds() - new Date(data.event.create).getSeconds()} seconds ago</td>
-
-
-
-             }
-
-
-             <td><Link to={`/updatePage/${data?._id}`}><span className="edit"><BiEdit /></span></Link><span onClick={() => deleteItem(data?._id)} className="delete"><AiFillDelete />
-             </span></td>
-         </tr>
-     )
- 
- }
-</table>
+           
 <div className="organizeData">
                 <div className="container">
                     <div className="row">
@@ -186,7 +138,7 @@ const currentDate = new Date()
                                 </div>
 
                                 <div className="button d-flex justify-content-between">
-                                    <a className="btn btn-success" href={data.event.readme} target="_blank" rel="noreferrer">Read Me</a>
+                                    <a className="btn btn-success" href={data.event.readme} target="_blank" rel="noreferrer" >Read Me</a>
                                     <a className="btn btn-secondary" href={data.event.gitUrl}  target="_blank" rel="noreferrer">Github</a>
                                 </div>
                             </div>
@@ -197,6 +149,7 @@ const currentDate = new Date()
                     </div>
                 </div>
             </div>
+          
         </div>
     );
 };
