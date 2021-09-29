@@ -179,8 +179,8 @@ const currentDate = new Date()
                                 </div>
 
                                 <div className="button d-flex justify-content-between">
-                                    <a className="btn btn-success" href={data.event.readme} target="_blank">Read Me</a>
-                                    <a className="btn btn-secondary" href={data.event.gitUrl}  target="_blank">Github</a>
+                                    <a className="btn btn-success" href={data.event.readme} target="_blank" rel="noreferrer">Read Me</a>
+                                    <a className="btn btn-secondary" href={data.event.gitUrl}  target="_blank" rel="noreferrer">Github</a>
                                 </div>
                             </div>
                         </div>
