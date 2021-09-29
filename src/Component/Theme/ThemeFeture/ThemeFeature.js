@@ -1,8 +1,8 @@
 
 import React, {  useState,useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { AiFillDelete } from 'react-icons/ai'
-import { BiEdit } from 'react-icons/bi'
+// import { Link } from 'react-router-dom';
+// import { AiFillDelete } from 'react-icons/ai'
+// import { BiEdit } from 'react-icons/bi'
 
 import axios from 'axios';
 
