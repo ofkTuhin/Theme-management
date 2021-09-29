@@ -12,13 +12,14 @@ const GetData = () => {
         console.log(result.data)
         setDataInput(result.data)
         
+        
        }
     
     useEffect(()=>{
    
       res()  
      
-    },[dataInput,reload])
+    },[reload])
     //aikhane
    
 

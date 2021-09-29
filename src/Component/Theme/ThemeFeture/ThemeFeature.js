@@ -19,6 +19,7 @@ const ThemeFeature = ({deleteItem,}) => {
         const result=await axios.get('https://guarded-woodland-52046.herokuapp.com/data')
         console.log(result.data)
         setDataInput(result.data)
+        setReload(result.data)
         
        }
     useEffect(()=>{
@@ -32,21 +33,27 @@ const ThemeFeature = ({deleteItem,}) => {
 
      const handleAll=(e)=>{
        
+       if(dataInput){
         console.log('all')
-           setDataInput([...dataInput])
-           setReload(dataInput)
-           console.log(dataInput)
+        setDataInput(dataInput)
+        
+        console.log(dataInput)
+       }
        }
        const handleFork=()=>{
       dataInput.sort((a,b)=>b.event.fork-a.event.fork)
         
          setDataInput( [...dataInput])
+         setReload(dataInput)
          console.log( dataInput)
  
      }
      const handleStars=()=>{
+         console.log('star')
      dataInput.sort((a,b)=>b.event.star-a.event.star)
        setDataInput([...dataInput])
+       setReload(dataInput)
+       console.log(reload)
       
      
        console.log(dataInput)
