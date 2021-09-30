@@ -13,7 +13,7 @@ import './style.css'
 
 const AddForm = () => {
     const history=useHistory()
-    const[encode,setEncode]=useState('')
+    
   
     const { register, handleSubmit, formState: { errors } } = useForm();
     
@@ -29,8 +29,10 @@ const AddForm = () => {
        const res = async () => {
         const result = await axios.get(`https://api.github.com/repos${[pathname]}`);
        const readMe= await axios.get(`https://api.github.com/repos${[pathname]}/contents/README.md`)
-       setEncode(readMe.data.content)
-       const decodeCode=Base64.atob(encode)
+       console.log(readMe.data.content)
+       
+       
+       const decodeCode=Base64.atob(readMe.data.content)
        console.log(decodeCode)
    
        
@@ -55,11 +57,7 @@ const AddForm = () => {
            event
             
          })
-        // .then(res=>{
-        //     console.log(res)
-        //     history.push()
-            
-        // })
+      
         .then(da=>console.log(da))
        
 

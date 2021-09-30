@@ -139,7 +139,10 @@ const currentDate = new Date()
                                 </div>
 
                                 <div className="button d-flex justify-content-between">
-                                   <ModalData href={data.event.readMe}></ModalData>
+                                    {console.log('data',data.event.readMe)}
+                                   <ModalData href={data.event.readMe}
+                                   
+                                   ></ModalData>
                                     <a className="btn btn-secondary" href={data.event.gitUrl}  target="_blank" rel="noreferrer">Github</a>
                                 </div>
                             </div>

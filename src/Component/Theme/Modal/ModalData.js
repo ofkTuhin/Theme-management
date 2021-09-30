@@ -17,7 +17,7 @@ const customStyles = {
 Modal.setAppElement('#root');
 
 const ModalData = ({href}) => {
-  console.log(parse(href))
+  console.log(href)
 
 
   const [modalIsOpen, setIsOpen] = useState(false);
