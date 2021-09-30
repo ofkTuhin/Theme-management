@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { useHistory } from 'react-router';
 import GitUrlParse from 'git-url-parse'
+import { Base64 } from 'js-base64';
+
 
 import './style.css'
 
@@ -11,24 +13,29 @@ import './style.css'
 
 const AddForm = () => {
     const history=useHistory()
- 
-
-    
-    
-   
+    const[encode,setEncode]=useState('')
+  
     const { register, handleSubmit, formState: { errors } } = useForm();
     
- 
-       
-
 
     const onSubmit = (data,e) => {
 
         console.log(data.url)
        const pathname = GitUrlParse(data.url).pathname
        console.log(pathname)
+       
+        
+      
        const res = async () => {
         const result = await axios.get(`https://api.github.com/repos${[pathname]}`);
+       const readMe= await axios.get(`https://api.github.com/repos${[pathname]}/contents/README.md`)
+       setEncode(readMe.data.content)
+       const decodeCode=Base64.atob(encode)
+       console.log(decodeCode)
+   
+       
+        
+       
         console.log(result)
         console.log(result.data.fork)
 
@@ -39,7 +46,8 @@ const AddForm = () => {
              LastCommit:result.data.updated_at,
              create:result.data.created_at,
              gitUrl:result.data.html_url,
-             readme:`https://github-data-exp.netlify.app/theme/${result.data.name}`
+             readMe:decodeCode
+            
  
          }
          console.log(event)
@@ -49,7 +57,8 @@ const AddForm = () => {
          })
         // .then(res=>{
         //     console.log(res)
-        //     
+        //     history.push()
+            
         // })
         .then(da=>console.log(da))
        

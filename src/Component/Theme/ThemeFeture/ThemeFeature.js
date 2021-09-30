@@ -8,6 +8,7 @@ import axios from 'axios';
 
 
 import './themFetaure.css'
+import ModalData from '../Modal/ModalData';
 
 // import axios from 'axios';
 
@@ -138,7 +139,7 @@ const currentDate = new Date()
                                 </div>
 
                                 <div className="button d-flex justify-content-between">
-                                    <a className="btn btn-success" href={data.event.readme} target="_blank" rel="noreferrer" >Read Me</a>
+                                   <ModalData href={data.event.readMe}></ModalData>
                                     <a className="btn btn-secondary" href={data.event.gitUrl}  target="_blank" rel="noreferrer">Github</a>
                                 </div>
                             </div>

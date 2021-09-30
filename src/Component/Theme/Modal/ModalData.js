@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
+import parse from 'html-react-parser'
+import markdownPro from 'markdown-pro';
+import {AiFillCloseCircle} from 'react-icons/ai'
 
 const customStyles = {
   content: {
@@ -13,42 +16,50 @@ const customStyles = {
 };
 Modal.setAppElement('#root');
 
-const ModalData = () => {
+const ModalData = ({href}) => {
+  console.log(parse(href))
+
+
   const [modalIsOpen, setIsOpen] = useState(false);
-  let subtitle;
+
   function openModal() {
     setIsOpen(true);
   }
-
-  function afterOpenModal() {
-    subtitle.style.color = '#f00';
-    // references are now sync'd and can be accessed.
+const iframe=``
+console.log(iframe)
+  // const Iframe=()=> {
    
-  }
+  //   <div dangerouslySetInnerHTML={{ __html: }}>
+  //   </div>
+    
+  //   // references are now sync'd and can be accessed.
+   
+  // }
 
   function closeModal() {
     setIsOpen(false);
   }
     return (
         <div>
-          <button onClick={openModal}>modal</button>
+          <button className="btn btn-success" onClick={openModal}>Readme</button>
             <Modal
         isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
+       
+        // onAfterOpen={Iframe}
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <h2 ref={(_subtitle) => (subtitle = _subtitle)}>Hello</h2>
-        <button onClick={closeModal}>close</button>
-        <div>I am a modal</div>
-        <form>
-          <input />
-          <button>tab navigation</button>
-          <button>stays</button>
-          <button>inside</button>
-          <button>the modal</button>
-        </form>
+         
+        
+        {/* <button ><AiFillCloseCircle/></button> */}
+        <AiFillCloseCircle onClick={closeModal} style={{cursor:'pointer'}}/>
+        
+       
+        <div style={{
+          height:'400px',
+          width:'400px'
+        }}>{parse(markdownPro(href))}</div>
       </Modal>
         </div>
     );

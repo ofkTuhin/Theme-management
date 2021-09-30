@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React,{useState,useEffect} from 'react';
-import ModalData from '../../Theme/Modal/ModalData';
+
 import ThemeFeature from '../../Theme/ThemeFeture/ThemeFeature';
 
 
@@ -55,7 +55,7 @@ const GetData = () => {
            >
 
            </ThemeFeature>
-           <ModalData></ModalData>
+           
          
         </>
     );
