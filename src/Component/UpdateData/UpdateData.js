@@ -10,12 +10,12 @@ const UpdateData = () => {
     const [dataInput, setDataInput] = useState([])
     
 //   const [imageUrl,setImageUrl]=useState()
-//     const [reload,setReload]=useState('')
-//     const[name,setName]=useState('')
-//     const[version,setVersion]=useState('')
-//     const[feature,setFeature]=useState('')
-//     const[website,setWebsite]=useState('')
-//     const[image,setImage]=useState('')
+    const [reload,setReload]=useState('')
+    const[name,setName]=useState('')
+    const[version,setVersion]=useState('')
+    const[feature,setFeature]=useState('')
+    const[website,setWebsite]=useState('')
+    const[image,setImage]=useState('')
 //    const history= useHistory()
 
 //     const { register, handleSubmit, formState: { errors } } = useForm({});
@@ -28,11 +28,7 @@ console.log(id)
 //     fetch(`https://guarded-woodland-52046.herokuapp.com/singleValue/${id}`)
 // .then(res=>res.json())
 // .then(data=>{
-//     setName(data.event.name)
-//     setFeature(data.event.feature)
-//    setImage(data.event.image)
-//     setWebsite(data.event.website)
-//     setVersion(data.event.version)
+
 
 // })
 
@@ -44,32 +40,39 @@ console.log(id)
     
     const res = async () => {
 
-        const result = await axios.get('https://guarded-woodland-52046.herokuapp.com/data')
-        console.log(result.data)
-        setDataInput(result.data)
+       
+       
 
 
     }
 
-useEffect(()=>{
 res()
-})
+useEffect(()=>{
+    axios.get(`https://guarded-woodland-52046.herokuapp.com/singleValue/${id}`)
+    .then(data=>console.log(data.data))
 
+    
+    setName(dataInput.event.themeName)
+setFeature(dataInput.event.fork)
+setImage(dataInput.event.star)
+setWebsite(dataInput.event.create)
+setVersion(dataInput.event.LastCommit)
+})
     const updateData={
-        themeName:dataInput.event.themeName,
-        fork:dataInput.event.fork,
-        star:dataInput.event.star,
-       create:dataInput.event.create,
-        LastCommit:dataInput.event.LastCommit
+        themeName:name,
+        fork:feature,
+        star:image,
+       create:website,
+        LastCommit:version
        
         }
 
-           setInterval(()=>{
-    fetch(`https://guarded-woodland-52046.herokuapp.com/updateOne/${id}`,{
-        method:'PATCH',
-        headers:{'content-type':'application/json'},
-        body: JSON.stringify(updateData)
-    },)},[1000])
+    //        setInterval(()=>{
+    // fetch(`https://guarded-woodland-52046.herokuapp.com/updateOne/${id}`,{
+    //     method:'PATCH',
+    //     headers:{'content-type':'application/json'},
+    //     body: JSON.stringify(updateData)
+    // },)},[1000])
 
 //update data
 
