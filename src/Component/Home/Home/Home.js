@@ -20,6 +20,8 @@ const Home = () => {
 //         })
 //         console.log(p)
 // },[3000])
+const date=new Date('2021-10-02T05:59:57Z')
+console.log(date.getSeconds())
 
 
     // useEffect(() => {

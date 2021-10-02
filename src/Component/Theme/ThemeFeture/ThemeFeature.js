@@ -38,7 +38,7 @@ const ThemeFeature = ({ deleteItem, }) => {
     const handleAll = (e) => {
 
 
-        console.log('all')
+        
         setDataInput([...dataInput])
         setReload(dataInput)
 
@@ -68,6 +68,7 @@ const ThemeFeature = ({ deleteItem, }) => {
     }
 
     const currentDate = new Date()
+    console.log(currentDate)
 
     return (
         <div>
@@ -123,23 +124,29 @@ const ThemeFeature = ({ deleteItem, }) => {
                                                                     <small>{currentDate.getSeconds() - new Date(data.event.create).getSeconds()} seconds ago</small>
                                             }</h6>
                                             <h6 className="commitCreate">LastCommit:
+                                            {
+                                                console.log()
+                                            }
+
+
                                                 {
+                                                  
 
-                                                    currentDate.getFullYear() > new Date(data.event.create).getFullYear() ? <small>{currentDate.getFullYear() - new Date(data.event.create).getFullYear()}  year ago</small> :
-                                                        currentDate.getMonth() > new Date(data.event.create).getMonth() ? <small>{currentDate.getMonth() - new Date(data.event.create).getMonth()} month ago</small> :
+                                                    currentDate.getFullYear() > new Date(data.event.LastCommit).getFullYear() ? <small>{currentDate.getFullYear() - new Date(data.event.LastCommit).getFullYear()}  year ago</small> :
+                                                        currentDate.getMonth() > new Date(data.event.LastCommit).getMonth() ? <small>{currentDate.getMonth() - new Date(data.event.LastCommit).getMonth()} month ago</small> :
 
-                                                            currentDate.getDate() > new Date(data.event.create).getDate() ? <small> {currentDate.getDate() - new Date(data.event.create).getDate()}days ago</small> :
+                                                            currentDate.getDate() > new Date(data.event.LastCommit).getDate() ? <small> {currentDate.getDate() - new Date(data.event.LastCommit).getDate()}days ago</small> :
 
-                                                                currentDate.getHours() > new Date(data.event.create).getHours() ? <small>{currentDate.getHours() - new Date(data.event.create).getHours()} hours ago</small> :
+                                                                currentDate.getHours() > new Date(data.event.LastCommit).getHours() ? <small>{currentDate.getHours() - new Date(data.event.LastCommit).getHours()} hours ago</small> :
 
-                                                                    currentDate.getMinutes() > new Date(data.event.create).getMinutes() ? <small>{currentDate.getMinutes() - new Date(data.event.create).getMinutes()} minutes ago</small> :
-                                                                        <small>{currentDate.getSeconds() - new Date(data.event.create).getSeconds()} seconds ago</small>
+                                                                    currentDate.getMinutes() > new Date(data.event.LastCommit).getMinutes() ? <small>{currentDate.getMinutes() - new Date(data.event.LastCommit).getMinutes()} minutes ago</small> :
+                                                                        <small>{currentDate.getSeconds() - new Date(data.event.LastCommit).getSeconds()} seconds ago</small>
                                                 }
                                             </h6>
                                         </div>
 
                                         <div className="button d-flex justify-content-between">
-                                            {console.log('data', data.event.readMe)}
+                                            
                                             <ModalData href={data.event.readMe}
 
                                             ></ModalData>
