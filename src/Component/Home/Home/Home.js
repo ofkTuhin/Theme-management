@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import AddForm from '../AddForm/AddForm';
 // import { Base64 } from 'js-base64';
@@ -9,11 +10,16 @@ import AddForm from '../AddForm/AddForm';
 
 const Home = () => {
     // const [encode, setEncode] = useState('')
-    
+    const p='hi update ok'
 
 
 
-
+// setInterval(()=>{
+//     axios.post('http://localhost:3000/updateTest',{
+//         p
+//         })
+//         console.log(p)
+// },[3000])
 
 
     // useEffect(() => {
