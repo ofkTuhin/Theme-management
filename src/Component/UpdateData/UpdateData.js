@@ -81,12 +81,15 @@ useEffect(()=>{
         console.log(updateData)
  
 
-           setInterval(()=>{
-    fetch(`https://guarded-woodland-52046.herokuapp.com/updateOne/${id}`,{
-        method:'PATCH',
-        headers:{'content-type':'application/json'},
-        body: JSON.stringify(updateData)
-    },)},[60*1000])
+          
+  
+    const updatedData=()=>{
+        fetch(`http://localhost:3000/updateOne/${id}`,{
+            method:'PATCH',
+            headers:{'content-type':'application/json'},
+            body: JSON.stringify(updateData)
+        },)
+    }
 
 //update data
 
@@ -122,6 +125,7 @@ useEffect(()=>{
     return (
         <div className="add-form">
             <h2 className="heading">Update Data</h2>
+            <button onClick={updatedData}>button</button>
 {/*            
            <form onSubmit={handleSubmit(onSubmit)}>
       
