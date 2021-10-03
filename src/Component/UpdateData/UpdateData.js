@@ -11,7 +11,7 @@ const UpdateData = () => {
     console.log("dataInput",dataInput)
     
 //   const [imageUrl,setImageUrl]=useState()
-   
+   const [fullName,setFullName]=useState('')
   const [themeName,setThemeName]=useState('')
   const [fork,setFork]=useState('')
   const [star,setStar]=useState('')
@@ -33,17 +33,16 @@ console.log(id)
 
 
 
-// },[id,reload])
+// },[id])
+
 
 
 useEffect(()=>{
     axios.get(`https://guarded-woodland-52046.herokuapp.com/singleValue/${id}`)
-    .then(data=>{console.log(data.data.event)     
-    setThemeName(data.data.event.themeName)
-    setFork(data.data.event.fork)
-     setStar(data.data.event.star)
-    setCreate(data.data.event.create)
-    setLastCommit(data.data.event.LastCommit)
+    .then(data=>{console.log(data.data.event.fullName)     
+    
+    setFullName(data.data.event.fullName)
+
     
     }
     
@@ -51,6 +50,25 @@ useEffect(()=>{
 
    
 },[id])
+
+// themeName:result.data.name,
+// fork:result.data.forks,
+// fullName:result.data.full_name,
+// star:result.data.stargazers_count,
+// LastCommit:result.data.updated_at,
+// create:result.data.created_at,
+// gitUrl:result.data.html_url,
+
+useEffect(()=>{
+    axios.get(`https://api.github.com/repos/${fullName}`)
+.then(data=>{
+    setCreate(data.data.created_at)
+    setFork(data.data.forks)
+    setLastCommit(data.data.updated_at)
+    setStar(data.data.stargazers_count)
+    setThemeName(data.data.name)
+})
+},[fullName])
 
     const updateData={
         themeName:themeName,
@@ -61,13 +79,14 @@ useEffect(()=>{
        
         }
         console.log(updateData)
+ 
 
-    //        setInterval(()=>{
-    // fetch(`https://guarded-woodland-52046.herokuapp.com/updateOne/${id}`,{
-    //     method:'PATCH',
-    //     headers:{'content-type':'application/json'},
-    //     body: JSON.stringify(updateData)
-    // },)},[60*1000])
+           setInterval(()=>{
+    fetch(`https://guarded-woodland-52046.herokuapp.com/updateOne/${id}`,{
+        method:'PATCH',
+        headers:{'content-type':'application/json'},
+        body: JSON.stringify(updateData)
+    },)},[60*1000])
 
 //update data
 

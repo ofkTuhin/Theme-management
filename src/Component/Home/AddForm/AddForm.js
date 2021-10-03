@@ -34,16 +34,14 @@ const AddForm = () => {
        
        const decodeCode=Base64.atob(readMe.data.content)
        console.log(decodeCode)
-   
-       
-        
-       
-        console.log(result)
-        console.log(result.data.fork)
+
+        console.log('result',result.data)
+      
 
          const event = {
              themeName:result.data.name,
              fork:result.data.forks,
+             fullName:result.data.full_name,
              star:result.data.stargazers_count,
              LastCommit:result.data.updated_at,
              create:result.data.created_at,
@@ -62,24 +60,15 @@ const AddForm = () => {
        
 
       };
-      res(history.push('/getData'))
+      res()
        
-     
+    //   history.push('/getData')
         
         e.target.reset()
     };
 
-    // const handleImageChange=e=>{
-
-    //     const imageData=new FormData()
-    //     imageData.set('key','ac14fb7fe7d3b9b39f81a751405dbb8e')
-    //     imageData.append('image',e.target.files[0])
-    //     axios.post('https://api.imgbb.com/1/upload',imageData)
-    //     .then(res=>{
-    //         console.log(res.data.data)
-    //         setImageUrl(res.data.data.display_url)
-    //     })
-    // }
+    // update 
+ 
    
    
     return (
