@@ -10,6 +10,10 @@ table li{
     list-style: none;
     text-align: center
 }
+a{
+    text-decoration: none;
+    color:black
+}
 span{
     cursor: pointer;
     margin-left: 10px;

@@ -7,18 +7,17 @@ import axios from 'axios';
 
 const UpdateData = () => {
 
-    const [dataInput, setDataInput] = useState([])
+    const [dataInput, setDataInput] = useState({})
+    console.log("dataInput",dataInput)
     
 //   const [imageUrl,setImageUrl]=useState()
-    const [reload,setReload]=useState('')
-    const[name,setName]=useState('')
-    const[version,setVersion]=useState('')
-    const[feature,setFeature]=useState('')
-    const[website,setWebsite]=useState('')
-    const[image,setImage]=useState('')
-//    const history= useHistory()
-
-//     const { register, handleSubmit, formState: { errors } } = useForm({});
+   
+  const [themeName,setThemeName]=useState('')
+  const [fork,setFork]=useState('')
+  const [star,setStar]=useState('')
+  const [LastCommit,setLastCommit]=useState('')
+  const [create,setCreate]=useState('')
+ const { register, handleSubmit, formState: { errors } } = useForm({});
 
     
    
@@ -37,42 +36,38 @@ console.log(id)
 // },[id,reload])
 
 
-    
-    const res = async () => {
-
-       
-       
-
-
-    }
-
-res()
 useEffect(()=>{
     axios.get(`https://guarded-woodland-52046.herokuapp.com/singleValue/${id}`)
-    .then(data=>console.log(data.data))
-
+    .then(data=>{console.log(data.data.event)     
+    setThemeName(data.data.event.themeName)
+    setFork(data.data.event.fork)
+     setStar(data.data.event.star)
+    setCreate(data.data.event.create)
+    setLastCommit(data.data.event.LastCommit)
     
-    setName(dataInput.event.themeName)
-setFeature(dataInput.event.fork)
-setImage(dataInput.event.star)
-setWebsite(dataInput.event.create)
-setVersion(dataInput.event.LastCommit)
-})
+    }
+    
+)
+
+   
+},[id])
+
     const updateData={
-        themeName:name,
-        fork:feature,
-        star:image,
-       create:website,
-        LastCommit:version
+        themeName:themeName,
+        fork:fork,
+        star:star,
+       create:create,
+        LastCommit:LastCommit
        
         }
+        console.log(updateData)
 
     //        setInterval(()=>{
     // fetch(`https://guarded-woodland-52046.herokuapp.com/updateOne/${id}`,{
     //     method:'PATCH',
     //     headers:{'content-type':'application/json'},
     //     body: JSON.stringify(updateData)
-    // },)},[1000])
+    // },)},[60*1000])
 
 //update data
 
