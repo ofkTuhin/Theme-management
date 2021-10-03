@@ -17,6 +17,7 @@ const UpdateData = () => {
   const [star,setStar]=useState('')
   const [LastCommit,setLastCommit]=useState('')
   const [create,setCreate]=useState('')
+  const [readme,setReadme]=useState('')
  const { register, handleSubmit, formState: { errors } } = useForm({});
 
     
@@ -67,6 +68,8 @@ useEffect(()=>{
     setLastCommit(data.data.updated_at)
     setStar(data.data.stargazers_count)
     setThemeName(data.data.name)
+    setReadme(data.data.readMe
+        )
 })
 },[fullName])
 
@@ -75,7 +78,8 @@ useEffect(()=>{
         fork:fork,
         star:star,
        create:create,
-        LastCommit:LastCommit
+        LastCommit:LastCommit,
+        readme:readme
        
         }
         console.log(updateData)

@@ -96,7 +96,7 @@ const ThemeFeature = ({ deleteItem, }) => {
                         {
                             dataInput.map(data =>
                                 <div className="col-lg-3">
-                               <Link to={`/updatePage/${data._id}`}>
+                               
                                <div className="themeData">
                                         <div className="themeImage">
                                             <img src={`https://demo.gethugothemes.com/thumbnails/${data.event.themeName.replace("-hugo","")}.webp`} alt="ddd" />
@@ -105,7 +105,7 @@ const ThemeFeature = ({ deleteItem, }) => {
 
                                         </div>
                                         <div className="themeName">
-                                            <h4>{data.event.themeName}</h4>
+                                        <Link to={`/updatePage/${data._id}`}>  <h4>{data.event.themeName}</h4>  </Link>
                                         </div>
                                         <div className="startFork">
                                             <div className="row">
@@ -155,7 +155,7 @@ const ThemeFeature = ({ deleteItem, }) => {
                                             <a className="btn btn-secondary" href={data.event.gitUrl} target="_blank" rel="noreferrer">Github</a>
                                         </div>
                                     </div>
-                               </Link>
+                             
                                 </div>
                             )
 
