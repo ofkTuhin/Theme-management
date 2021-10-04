@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory, useParams } from 'react-router';
-import {useForm } from "react-hook-form";
+import { useParams } from 'react-router';
 import axios from 'axios';
 import { Base64 } from 'js-base64';
-import parse from 'html-react-parser'
-import markdownPro from 'markdown-pro';
+
 
 
 
 const UpdateData = () => {
-const[inputReadme,setInputReadme]=useState('')
+
     const [dataInput, setDataInput] = useState({})
     console.log("dataInput",dataInput)
     
@@ -23,7 +21,7 @@ const[inputReadme,setInputReadme]=useState('')
   const [create,setCreate]=useState('')
   const [readme,setReadme]=useState('')
 //   console.log('readme',readme)
- const { register, handleSubmit, formState: { errors } } = useForm({});
+//  const { register, handleSubmit, formState: { errors } } = useForm({});
 
 
     
@@ -93,7 +91,7 @@ const decodeCode=Base64.atob(readme)
   setInterval(()=>{
     const newData={...updateData,dataInput}
     console.log('abcd',newData)
-    fetch(`http://localhost:3000/updateOne/${id}`,{
+    fetch(`https://guarded-woodland-52046.herokuapp.com/updateOne/${id}`,{
         method:'PATCH', 
         headers:{'content-type':'application/json'},
         body: JSON.stringify(updateData)
