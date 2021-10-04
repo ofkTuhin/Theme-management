@@ -14,8 +14,8 @@ import { Link } from 'react-router-dom';
 // import axios from 'axios';
 
 
-
-const ThemeFeature = ({ deleteItem, }) => {
+// { deleteItem, }
+const ThemeFeature = () => {
 
     const [dataInput, setDataInput] = useState([])
     const [reload, setReload] = useState('')
