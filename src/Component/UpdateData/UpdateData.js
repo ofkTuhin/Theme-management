@@ -93,7 +93,7 @@ const decodeCode=Base64.atob(readme)
   setInterval(()=>{
     const newData={...updateData,dataInput}
     console.log('abcd',newData)
-    fetch(`http://localhost:3000/updateOne/${id}`,{
+    fetch(`https://guarded-woodland-52046.herokuapp.com/${id}`,{
         method:'PATCH', 
         headers:{'content-type':'application/json'},
         body: JSON.stringify(updateData)
