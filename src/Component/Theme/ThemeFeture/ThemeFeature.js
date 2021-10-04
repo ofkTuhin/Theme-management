@@ -50,20 +50,14 @@ const ThemeFeature = ({ deleteItem, }) => {
         dataInput.sort((a, b) => b.event.fork - a.event.fork)
 
         setDataInput([...dataInput])
-
-
-        console.log(dataInput)
+         console.log(dataInput)
 
     }
     const handleStars = () => {
         console.log('star')
         dataInput.sort((a, b) => b.event.star - a.event.star)
         setDataInput([...dataInput])
-
-
         console.log(reload)
-
-
         console.log(dataInput)
 
     }

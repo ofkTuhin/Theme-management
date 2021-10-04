@@ -2,76 +2,73 @@ import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 import {useForm } from "react-hook-form";
 import axios from 'axios';
+import { Base64 } from 'js-base64';
+import parse from 'html-react-parser'
+import markdownPro from 'markdown-pro';
 
 
 
 const UpdateData = () => {
-
+const[inputReadme,setInputReadme]=useState('')
     const [dataInput, setDataInput] = useState({})
     console.log("dataInput",dataInput)
     
-//   const [imageUrl,setImageUrl]=useState()
+  
    const [fullName,setFullName]=useState('')
+   console.log('abc',fullName)
   const [themeName,setThemeName]=useState('')
   const [fork,setFork]=useState('')
   const [star,setStar]=useState('')
   const [LastCommit,setLastCommit]=useState('')
   const [create,setCreate]=useState('')
   const [readme,setReadme]=useState('')
+//   console.log('readme',readme)
  const { register, handleSubmit, formState: { errors } } = useForm({});
+
 
     
    
 const {id}=useParams()
 console.log(id)
-// useEffect(()=>{
-//     fetch(`https://guarded-woodland-52046.herokuapp.com/singleValue/${id}`)
-// .then(res=>res.json())
-// .then(data=>{
 
-
-// })
-
-
-
-// },[id])
 
 
 
 useEffect(()=>{
     axios.get(`https://guarded-woodland-52046.herokuapp.com/singleValue/${id}`)
-    .then(data=>{console.log(data.data.event.fullName)     
-    
-    setFullName(data.data.event.fullName)
+    .then(data=>{console.log(data.data.event)
+        setDataInput(data.data.event)
+        setFullName(data.data.event.fullName)
 
-    
-    }
-    
+    }    
+   
 )
-
    
 },[id])
 
-// themeName:result.data.name,
-// fork:result.data.forks,
-// fullName:result.data.full_name,
-// star:result.data.stargazers_count,
-// LastCommit:result.data.updated_at,
-// create:result.data.created_at,
-// gitUrl:result.data.html_url,
+
+// const decodeReadme=Base64.
+
 
 useEffect(()=>{
+    
     axios.get(`https://api.github.com/repos/${fullName}`)
 .then(data=>{
+    console.log('object',data.data)
     setCreate(data.data.created_at)
     setFork(data.data.forks)
     setLastCommit(data.data.updated_at)
     setStar(data.data.stargazers_count)
     setThemeName(data.data.name)
-    setReadme(data.data.readMe
-        )
+    
 })
+
 },[fullName])
+axios.get(`https://api.github.com/repos/${fullName}/contents/README.md`)
+.then(data=>setReadme(data.data.content))
+const decodeCode=Base64.atob(readme)
+
+
 
     const updateData={
         themeName:themeName,
@@ -79,100 +76,35 @@ useEffect(()=>{
         star:star,
        create:create,
         LastCommit:LastCommit,
-        readme:readme
+        readMe:decodeCode,
+        fullName:fullName
+
        
         }
-        console.log(updateData)
+        console.log('update',updateData)
  
+
 
           
   
-    const updatedData=()=>{
-        fetch(`http://localhost:3000/updateOne/${id}`,{
-            method:'PATCH',
-            headers:{'content-type':'application/json'},
-            body: JSON.stringify(updateData)
-        },)
-    }
-
-//update data
-
-// const onSubmit = (data,e) => {
-   
- 
-    
-
-//         console.log(updateData)
-//     console.log(id)
-
-//    })
-//     .then(res=>{console.log(res)
-    
-//       history.push('/getData')
-//     })
-//     .then(data=>setReload(data))
-//     e.target.reset()
-
-// };
-// const handleImageChange=e=>{
-
-//     const imageData=new FormData()
-//     imageData.set('key','ac14fb7fe7d3b9b39f81a751405dbb8e')
-//     imageData.append('image',e.target.files[0])
-//     axios.post('https://api.imgbb.com/1/upload',imageData)
-//     .then(res=>{
-//         setImageUrl(res.data.data.display_url)
-//     })
-// }
-
-   
+    // const updatedData=()=>{
+      
+    // }
+  setInterval(()=>{
+    const newData={...updateData,dataInput}
+    console.log('abcd',newData)
+    fetch(`http://localhost:3000/updateOne/${id}`,{
+        method:'PATCH', 
+        headers:{'content-type':'application/json'},
+        body: JSON.stringify(updateData)
+    },)
+  },[180*1000])
+  
     return (
         <div className="add-form">
             <h2 className="heading">Update Data</h2>
-            <button onClick={updatedData}>button</button>
-{/*            
-           <form onSubmit={handleSubmit(onSubmit)}>
-      
-     <div className="input-group">
-     <input className="form-control"  {...register("name")} placeholder="Theme Name" id="name" type="text" value={name}
-      onInput={e=>setName(e.target.value)} /><br/>
-     </div>
-
-      <div className="input-group">
-     <input className="form-control" {...register("version")} placeholder="Theme Version" id="version" value={version} onInput={e=>setVersion(e.target.value)}/><br/>
-     </div>
-    
-      {errors.exampleRequired && <span>This field is required</span>}
-      
-      <div className="input-group">
-
-     <textarea className="form-control" {...register("feature")} 
-      name="feature" placeholder="Feature" id="feature" value={feature}onInput={e=>setFeature(e.target.value)}/><br/>
-     </div>
-      
-      {errors.exampleRequired && <span>This field is required</span>}
-
-      <div className="input-group">
-     <textarea className="form-control" {...register("website")} placeholder="Inspiration Site" id="website" value={website}onInput={e=>setWebsite(e.target.value)}/><br/>
-     </div>
-    
-      {errors.exampleRequired && <span>This field is required</span>}
-      <div className="input-group">
-     <input className="form-control" {...register("image")} placeholder="Theme Image" id="image"  type="file" 
-    value={image} alt="fff" onInput={
-         (e)=>handleImageChange(e)}/><br/>
-     </div>
-      
-      {errors.exampleRequired && <span>This field is required</span>}
-      
-      
- <div class="d-grid gap-2"> <button class="btn btn-primary"  type="submit">Update</button></div>
-  
-
-    </form> */}
-
-    
-         
+            {/* <button onClick={updatedData}>button</button> */}
+ 
         </div>
     );
 };
