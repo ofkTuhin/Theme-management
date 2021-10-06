@@ -25,8 +25,8 @@ const ModalData = ({href}) => {
   function openModal() {
     setIsOpen(true);
   }
-const iframe=``
-console.log(iframe)
+
+
   // const Iframe=()=> {
    
   //   <div dangerouslySetInnerHTML={{ __html: }}>

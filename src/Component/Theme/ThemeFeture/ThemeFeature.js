@@ -19,20 +19,19 @@ const ThemeFeature = () => {
 
     const [dataInput, setDataInput] = useState([])
     const [reload, setReload] = useState('')
-    const res = async () => {
-
-        const result = await axios.get('https://guarded-woodland-52046.herokuapp.com/data')
-        console.log(result.data)
-        setDataInput(result.data)
+    
+       
 
 
-    }
+    
     useEffect(() => {
 
+        axios.get('https://guarded-woodland-52046.herokuapp.com/data')
+        
+      .then(data=>  setDataInput(data.data))
 
-
-        res()
-    }, [reload])
+        
+    }, [dataInput])
 
 
 
@@ -41,7 +40,7 @@ const ThemeFeature = () => {
 
         
         setDataInput([...dataInput])
-        setReload(dataInput)
+       
 
         console.log(dataInput)
 
@@ -50,20 +49,19 @@ const ThemeFeature = () => {
         dataInput.sort((a, b) => b.event.fork - a.event.fork)
 
         setDataInput([...dataInput])
-         console.log(dataInput)
+       
 
     }
     const handleStars = () => {
         console.log('star')
         dataInput.sort((a, b) => b.event.star - a.event.star)
         setDataInput([...dataInput])
-        console.log(reload)
-        console.log(dataInput)
+        
 
     }
 
     const currentDate = new Date()
-    console.log(currentDate)
+ 
 
     return (
         <div>

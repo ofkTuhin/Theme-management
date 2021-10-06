@@ -14,14 +14,13 @@ const UpdateData = () => {
   
    const [fullName,setFullName]=useState('')
    console.log('abc',fullName)
-  const [themeName,setThemeName]=useState('')
-  const [fork,setFork]=useState('')
-  const [star,setStar]=useState('')
-  const [LastCommit,setLastCommit]=useState('')
-  const [create,setCreate]=useState('')
-  const [readme,setReadme]=useState('')
-//   console.log('readme',readme)
-//  const { register, handleSubmit, formState: { errors } } = useForm({});
+//   const [themeName,setThemeName]=useState('')
+//   const [fork,setFork]=useState('')
+//   const [star,setStar]=useState('')
+//   const [LastCommit,setLastCommit]=useState('')
+//   const [create,setCreate]=useState('')
+//   const [readme,setReadme]=useState('')
+
 
 
     
@@ -40,46 +39,34 @@ useEffect(()=>{
 
     }    
    
-)
-   
+)   
 },[id])
 
 
 // const decodeReadme=Base64.
 
 
-useEffect(()=>{
+// useEffect(()=>{
     
-    axios.get(`https://api.github.com/repos/${fullName}`)
-.then(data=>{
-    console.log('object',data.data)
-    setCreate(data.data.created_at)
-    setFork(data.data.forks)
-    setLastCommit(data.data.updated_at)
-    setStar(data.data.stargazers_count)
-    setThemeName(data.data.name)
+//     axios.get(`https://api.github.com/repos/${fullName}`)
+// .then(data=>{
+//     console.log('object',data.data)
+//     setCreate(data.data.created_at)
+//     setFork(data.data.forks)
+//     setLastCommit(data.data.updated_at)
+//     setStar(data.data.stargazers_count)
+//     setThemeName(data.data.name)
     
-})
+// })
 
-},[fullName])
-axios.get(`https://api.github.com/repos/${fullName}/contents/README.md`)
-.then(data=>setReadme(data.data.content))
-const decodeCode=Base64.atob(readme)
+// },[fullName])
+// axios.get(`https://api.github.com/repos/${fullName}/contents/README.md`)
+// .then(data=>setReadme(data.data.content))
+// const decodeCode=Base64.atob(readme)
 
 
 
-    const updateData={
-        themeName:themeName,
-        fork:fork,
-        star:star,
-       create:create,
-        LastCommit:LastCommit,
-        readMe:decodeCode,
-        fullName:fullName
-
-       
-        }
-        console.log('update',updateData)
+    
  
 
 
@@ -88,15 +75,15 @@ const decodeCode=Base64.atob(readme)
     // const updatedData=()=>{
       
     // }
-  setInterval(()=>{
-    const newData={...updateData,dataInput}
-    console.log('abcd',newData)
-    fetch(`https://guarded-woodland-52046.herokuapp.com/${id}`,{
-        method:'PATCH', 
-        headers:{'content-type':'application/json'},
-        body: JSON.stringify(updateData)
-    },)
-  },[100*3000])
+    // setInterval(()=>{
+    //     const newData={...updateData,dataInput}
+    //     console.log('abcd',newData)
+    //     fetch(`https://guarded-woodland-52046.herokuapp.com/updateOne/${id}`,{
+    //         method:'PATCH', 
+    //         headers:{'content-type':'application/json'},
+    //         body: JSON.stringify(updateData)
+    //     },)
+    //   },[20*3000])
   
     return (
         <div className="add-form">
